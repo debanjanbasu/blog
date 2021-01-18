@@ -13,7 +13,7 @@ enableGitInfo: true
 enableInlineShortcodes: true
 
 disqusShortname: techdownunder-1
-# googleAnalytics: UA-123-45
+googleAnalytics: G-7SJSYHKF4D
 
 minify:
   disableXML: true
@@ -57,6 +57,9 @@ params:
   # disableSpecial1stPost: true
   displayFullLangName: true
   comments: true
+
+  assets:
+    disableFingerprinting: true
 
   profileMode:
     enabled: false
