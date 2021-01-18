@@ -13,7 +13,7 @@ enableGitInfo: true
 enableInlineShortcodes: true
 
 disqusShortname: techdownunder-1
-googleAnalytics: G-7SJSYHKF4D
+googleAnalytics: UA-116860215-4
 
 minify:
   disableXML: true
