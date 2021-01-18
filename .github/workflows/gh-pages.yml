@@ -3,13 +3,11 @@ name: Build GH-Pages
 on:
   push:
     paths-ignore:
-      - 'images/**'
-      - 'LICENSE'
-      - 'README.md'
+      - "images/**"
+      - "LICENSE"
+      - "README.md"
     branches:
       - main
-  workflow_dispatch:
-    # manual run
 
 jobs:
   deploy:
@@ -18,10 +16,9 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v2
         with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
           ref: main
-
-      - name: Get Theme
-        run: git submodule update --init --recursive
 
       - name: Update theme to Latest commit
         run: git submodule update --remote --merge
@@ -29,7 +26,15 @@ jobs:
       - name: Setup hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
+
+      - name: Cache hugo dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/hugo_cache
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
 
       - name: Build
         run: hugo --buildDrafts --gc --verbose --minify
