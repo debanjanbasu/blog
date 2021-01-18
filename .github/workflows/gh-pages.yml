@@ -46,3 +46,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           cname: techdownunder.ga
+          full_commit_message: ${{ github.event.head_commit.message }}
