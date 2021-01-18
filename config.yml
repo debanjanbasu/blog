@@ -81,6 +81,18 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/debanjanbasu"
+    - name: email
+      url: "debanjanbasu2006@gmail.com"
+    - name: facebook
+      url: "https://www.facebook.com/debanjan.basu"
+    - name: instagram
+      url: "https://www.instagram.com/debanjan.basu/"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/debanjan-basu-9b391234/"
+    - name: twitter
+      url: "https://twitter.com/debanjanbasu"
+    - name: paypal
+      url: "https://paypal.me/debanjanbasuaus"
     - name: KoFi
       url: "https://ko-fi.com/debanjanbasu"
     - name: RsS
