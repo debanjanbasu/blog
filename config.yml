@@ -77,10 +77,19 @@ params:
   homeInfoParams:
     Title: "Tech Down Under"
     Content: >
-      Curious Blog covering technologies coming from down under, i.e. Australia.
-      - **PaperMod** is a simple but fast and responsive theme with useful feature-set that enhances UX.
-      - Do give a 🌟 on Github !
-      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper).
+      Curious Blog covering technologies coming from down under 🦘 🇦🇺.
+
+      - Life as a cloud evangelist doesn't give quite a lot of freedom to blog. However, I'm a man who wears his ❤️ on his sleeve, so this is a way to showcase some of my passions.
+
+      -
+
+      - Feel free to contribute to the blog. It's super easy to post, and is available to everyone for free. Just create a branch, and raise a PR 😅.
+      
+      - Do give a 🌟 on Github ! (https://github.com/debanjanbasu/blog).
+
+      -
+
+      - Built with love using HUGO theme - **PaperMod**.
   socialIcons:
     - name: github
       url: "https://github.com/debanjanbasu"
