@@ -35,8 +35,59 @@ From what I can say, the [T4 is half the performance of an RTX 2080](https://ask
 ![PCMR](https://media.giphy.com/media/p43Qy0rpMOSyCacZum/giphy.gif "Pc Master Race")
 
 ## Parsec
-I guess there's no point to argue over the almighty [Linus Tech Tips, when he's using this for his team to edit LTT videos](https://www.youtube.com/watch?v=B821HqH-dWI). Shhhh... I'm a nerd, and not advocating for the almighty. But once a birdie referred to me as "Brown Anthony" 🤎, and actually I was super happy for it 😊.
+I guess there's no point to argue over the almighty [Linus Tech Tips, when he's using this for his team to edit LTT videos](https://www.youtube.com/watch?v=B821HqH-dWI). Shhhh... I'm a nerd, and not advocating for the almighty. But once a birdie referred to me as "Brown Anthony" 🤎, and actually I was quite happy for it 😊.
 
 {{< youtube B821HqH-dWI >}}
 ***
-The amazing thing about Parsec is 
+The amazing thing about Parsec is the BUD protocol. Parsec uses its own peer-to-peer networking protocol called BUD; Better User Datagrams (naming is hard). BUD has been optimized for low-latency video delivery based on the data gathered over a three year period. With a 97% NAT traversal success rate and lightning fast adjustment to packet loss and congestion, BUD is the cornerstone of the Parsec SDK.
+
+{{< youtube VDR8ws0eIbI >}}
+***
+The basic setup for game streaming involves
+>capture -> encode -> network -> decode -> render ->capture
+
+![Parsec-AWS Architecture](images/parsec-architecture.png "Parsec-AWS Architecture")
+
+## NVENC
+
+Hardware plays a huge role in the performance of these connections. The most important part of that being the encoding latency of the video. Encoding latency is the amount of time it takes for the hardware on a GPU to compress a frame of video captured off of the GPU to prepare it to be shipped across the internet to the guest PC. Nvidia’s [NVENC](https://www.nvidia.com/en-au/geforce/news/geforce-rtx-streaming/) is approximately 2.59 times faster than AMD VCE and 1.89 times faster than Intel Quick Sync. The median encoding latency for an Nvidia card is 5.8 milliseconds; whereas, the median encoding latency on VCE is 15.06 milliseconds. This encoding latency is measured across all Co-Play sessions in Parsec, so there’s definitely a performance difference between newer generation cards than older generation cards, which we will examine in a future post.
+
+![NVIDIA NVENC](images/geforce-rtx-streaming-new-obs-002.png "RTX Game Streaming")
+
+The NVENC Encoder plays key role in the decision behind selection of the G4dn instance, considering it supports this feature. Parsec can not only use this, but also encode in H265 hardware-accelerated, as of now. This was ideally what I was looking for, and a win-win for this use case.
+
+# My Setup - Terraform 🪄
+As usual, I would've and would be automating the provisioning, so I ended up using my old friend Terraform for the job. Although, you probably can us any tools such as Pulumi / AWS CDK / CloudFormation, and possibly even AWS CLI 😜. I've uploaded the repo to github for reference and usage, it's well documented in-code for the curious one. However, the ultimate goal is yet to be achieved, fully automated provisioning.
+
+**[github.com/debanjanbasu/instant-instance - Github Repo](https://github.com/debanjanbasu/instant-instance/)**
+
+The setup involves simple steps of 
+
+## 1. Initialize the tf backend - and the EC2 Instance
+
+  1. `terraform init` Downloads the initial modules and all
+  2. `terraform apply -auto-approve` Creates the backend.tf file with the config and the s3 bucket
+  3. `terraform init -force-copy` Copies the local state to s3
+  4. `terraform output instance_password` This is the generated Administrator password for the instance
+
+## 2. RDP into the instance
+Immediately as you RDP into the instance the automation kicks in, this is a deferred windows task to prepare the entire instance for gaming - SWEEEET 🤟.
+
+It installs the following items automagically:
+
+* Parsec
+* Latest NVIDIA Grid Driver - with AWS License
+* Razer Software - No need to register or login, this is for Audio Passthrough, and Gamepad compatibility
+* The following tools optionally - via `variables` passed to the cloud-gaming-instance tf module
+  * Steam
+  * GOG Galaxy
+  * UPlay
+  * Origin
+  * Epic Games Launcher
+
+![Parsec Auto Installation](images/parsec-installation.png "Parsec Auto Installation")
+
+## 3. Configure The Instance
+
+
+# Cost of Cloud Gaming on AWS
