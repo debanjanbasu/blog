@@ -134,6 +134,9 @@ params:
   #     favicon32x32: "<link / abs url>"
   #     apple_touch_icon: "<link / abs url>"
   #     safari_pinned_tab: "<link / abs url>"
+  cover:
+    linkFullImages: true
+    hidden: false
   # cover:
   #     hidden: true # hide everywhere but not in structured data
   #     hiddenInList: true # hide on list pages and home

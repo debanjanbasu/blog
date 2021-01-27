@@ -9,6 +9,13 @@ series: ["Cloud Gaming"]
 aliases: ["setup-aws-cloud-instance"]
 ShowToc: true
 TocOpen: true
+cover:
+    image: "images/cyberpunk-2077-running-1.png"
+    # can also paste direct link from external site
+    # ex. https://i.ibb.co/K0HVPBd/paper-mod-profilemode.png
+    alt: "Cloud Gaming on AWS"
+    # caption: "Cyberpunk 2077 on AWS G4dn"
+    relative: true # To use relative path for cover image, used in hugo Page-bundles
 ---
 
 # The problem
@@ -249,6 +256,11 @@ aws ssm start-automation-execution --document-name "image-reimage" `
 ```
 
 You can either execute this from within the instance, or from your local environment, or even as terraform `local-exec`.
+
+# For your eyes only 👀
+![Parsec Low Latency](images/impressive-latency.png "Parsec Low Latency")
+![In-Game](images/in-game-1.png "In-Game")
+![RTX max settings](images/RTX-max-settings.png "RTX max settings")
 
 # TODOs and future plans (Conclusion)
 
