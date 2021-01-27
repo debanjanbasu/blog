@@ -16,6 +16,8 @@ During times of a pandemic, many have reverted to their desks at home not only f
 
 ☁ Cloud gaming has taken shape rapidly in 2020, behind the scenes with platforms such as Stadia, GeForce NOW, and even AWS launching [Luna](https://www.amazon.com/luna/landing-page). However, wide adoption is yet to be seen here in this subcontinent 🦘🪃, with us still relying on painfully slow NBN, and over expensive capped mobile 5G data. To add to the pain, the price of a relatively new GPU is to sell a kidney off, if they're even available in stores ! The Next-gen consoles, are all out of stock, and [scalpers](https://www.tomsguide.com/news/ps5-and-xbox-series-x-scalpers-ruining-restocks-what-you-can-do-now) are aiming for afr rich-list this year 💵.
 
+<!--adsense-->
+
 # Solution
 This post is about how we can use AWS to our rescue, and leverage gpu instances, albeit not originally designed for gaming, to the rescue. However, it wouldn't stop me from playing a game after almost a decade.
 
@@ -48,6 +50,8 @@ The basic setup for game streaming involves
 
 ![Parsec-AWS Architecture](images/parsec-architecture.png "Parsec-AWS Architecture")
 
+<!--adsense-->
+
 ## NVENC
 
 Hardware plays a huge role in the performance of these connections. The most important part of that being the encoding latency of the video. Encoding latency is the amount of time it takes for the hardware on a GPU to compress a frame of video captured off of the GPU to prepare it to be shipped across the internet to the guest PC. Nvidia’s [NVENC](https://www.nvidia.com/en-au/geforce/news/geforce-rtx-streaming/) is approximately 2.59 times faster than AMD VCE and 1.89 times faster than Intel Quick Sync. The median encoding latency for an Nvidia card is 5.8 milliseconds; whereas, the median encoding latency on VCE is 15.06 milliseconds. This encoding latency is measured across all Co-Play sessions in Parsec, so there’s definitely a performance difference between newer generation cards than older generation cards, which we will examine in a future post.
@@ -55,6 +59,8 @@ Hardware plays a huge role in the performance of these connections. The most imp
 ![NVIDIA NVENC](images/geforce-rtx-streaming-new-obs-002.png "RTX Game Streaming")
 
 The NVENC Encoder plays key role in the decision behind selection of the G4dn instance, considering it supports this feature. Parsec can not only use this, but also encode in H265 hardware-accelerated, as of now. This was ideally what I was looking for, and a win-win for this use case.
+
+<!--adsense-->
 
 # My Setup - Terraform 🪄
 As usual, I would've and would be automating the provisioning, so I ended up using my old friend Terraform for the job. Although, you probably can us any tools such as Pulumi / AWS CDK / CloudFormation, and possibly even AWS CLI 😜. I've uploaded the repo to github for reference and usage, it's well documented in-code for the curious one. However, the ultimate goal is yet to be achieved, fully automated provisioning.
@@ -141,6 +147,7 @@ Parsec does support hardware accelerated decoding on the client machine too. If 
 Parsec does support up-to 4k natively without any issue, but I do happen to have a super-ultrawide gaming monitor. So why not get gaming at those exceptional aspect ratios. Unfortunately, the NVIDIA driver provided by AWS doesn't allow for custom resolution changes. The workaround is to use this sweet tool called [Custom Resolution Utility](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU).
 Fire it up, and you can add any custom resolutions, or directly export and import form your client machine, easy.
 
+<!--adsense-->
 # Cost of Cloud Gaming on AWS
 The infrastructure provisioned is already highly optimized, but can be improved further. The cost depends on your region and the type of instance you are using but AWS’ scalable platform allows individuals to create a cloud gaming setup inexpensively. If you wanted to keep the prices as low as possible, you can use a spot Amazon EC2 instance. What spot pricing allows you to do is bid on unused Amazon EC2 instance at a significant reduced rate. Roughly 1/7th the regular cost than regular instances. However, costs vary depending on the region, and prices will also reflect the demand of these spot instances. By comparison, on-demand instances have a fixed rate that won’t fluctuate based on demand unless Amazon changes them.
 

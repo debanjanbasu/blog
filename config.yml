@@ -19,6 +19,12 @@ minify:
   disableXML: true
   minifyOutput: true
 
+# For ads
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 languages:
   en:
     languageName: "English"
@@ -57,6 +63,10 @@ params:
   # disableSpecial1stPost: true
   displayFullLangName: true
   comments: true
+
+  Adsense:
+    client: "ca-pub-5205766380454070"
+    inArticleSlot: "5205766380454070"
 
   assets:
     disableFingerprinting: true
