@@ -60,6 +60,63 @@ Hardware plays a huge role in the performance of these connections. The most imp
 
 The NVENC Encoder plays key role in the decision behind selection of the G4dn instance, considering it supports this feature. Parsec can not only use this, but also encode in H265 hardware-accelerated, as of now. This was ideally what I was looking for, and a win-win for this use case.
 
+## AWS Automation 🤖
+While there have been some isolated attempts at AWS Cloud Gaming approach, none so far has dived into this simple tool. At the end of the day to reduce costs, as simple trick is to create an ami of the instance (it also creates the snapshot with it). This is a much simpler approach than AWS Lambda - based one, and as I always say KISS...
+
+**Automation Document**
+```json
+"mainSteps": [
+    {
+      "name": "createImage",
+      "action": "aws:createImage",
+      "onFailure": "Abort",
+      "inputs": {
+        "InstanceId": "{{ InstanceId }}",
+        "ImageName": "{{ InstanceId }}-{{global:DATE_TIME}}-{{automation:EXECUTION_ID}}",
+        "ImageDescription": "${var.instance_name}-ami-{{global:DATE_TIME}}",
+        "NoReboot": "{{ NoReboot }}"
+      },
+      "nextStep": "stopInstances"
+    },
+    {
+      "name": "stopInstances",
+      "action": "aws:changeInstanceState",
+      "onFailure": "step:deleteImage",
+      "inputs": {
+        "InstanceIds": ["{{ InstanceId }}"],
+        "DesiredState": "terminated"
+      },
+      "nextStep": "deleteImage"
+    },
+    {
+      "name": "deleteImage",
+      "action": "aws:deleteImage",
+      "onFailure": "step:storeAMIId",
+      "inputs": {
+        "ImageId": "{{ ToDeleteImageId }}"
+      },
+      "nextStep": "storeAMIId"
+    },
+    {
+      "name": "storeAMIId",
+      "action": "aws:executeAwsApi",
+      "onFailure": "Abort",
+      "inputs": {
+        "Service": "ssm",
+        "Api": "PutParameter",
+        "Name": "${var.ssm_ami_parameter_name}",
+        "Overwrite": true,
+        "Value": "{{ createImage.ImageId }}"
+      }
+    }
+  ]
+```
+
+This beautifully does...
+>Creates the AMI -> Terminates the instance -> Deletes the older Image -> Stores the new AMI Id in SSM Parameter Store
+
+The next time `terraform apply` is triggered, it would grab this new ami from the SSM Parameter Store as a `data` source.
+
 <!--adsense-->
 
 # My Setup - Terraform 🪄
