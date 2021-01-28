@@ -1,8 +1,8 @@
 # blog
 The mysteries of tech from down under 😜
 
-# To clone the submodules, aka theme
-git submodule update --init --recursive
+# To clone the HUGO modules, aka theme
+hugo mod init
 
-# To update the theme
-git submodule update --remote --merge
+# To update the theme / module
+hugo mod get -u
