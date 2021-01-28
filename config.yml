@@ -1,7 +1,6 @@
 baseURL: "https://techdownunder.ga"
 title: 💻 ⏬ under 😜
 paginate: 5
-theme: PaperMod
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -156,3 +155,8 @@ taxonomies:
   series: series
   technology: technology
 
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+    - path: github.com/jan-xyz/hugo-module-img-srcset
+    
