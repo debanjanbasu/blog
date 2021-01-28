@@ -1,0 +1,11 @@
+<script data-ad-client="{{.Site.Params.Adsense.client}}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- Load Lazyload JS conditionally -->
+{{ if or (.Resources.Match "**.jpg") (.Resources.Match "**.png") }}
+{{ $lazyload := resources.Get "js/lazyload.js" }}
+{{ $lazyload := $lazyload | resources.Minify }}
+{{ with $lazyload }}
+{{ $secureJS := . | resources.Fingerprint }}
+<script async type="text/javascript" src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+{{ end }}

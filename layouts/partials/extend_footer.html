@@ -1,0 +1,7 @@
+{{ if or (.Resources.Match "**.jpg") (.Resources.Match "**.png") }}
+<script>
+  var lazyLoadInstance = new LazyLoad({
+    elements_selector: ".lazy",
+  });
+</script>
+{{ end }}

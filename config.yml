@@ -158,5 +158,4 @@ taxonomies:
 module:
   imports:
     - path: github.com/adityatelange/hugo-PaperMod
-    - path: github.com/jan-xyz/hugo-module-img-srcset
     
