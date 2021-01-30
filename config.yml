@@ -70,6 +70,17 @@ params:
   assets:
     disableFingerprinting: true
 
+  Images:
+    maxSize: 2560
+    setSizes:
+      - 640
+      - 960
+      - 1280
+      - 1920
+      - 2560
+    sizes: '(min-width: 1023px) 780px, (min-width: 675px) 620px, 100vw'
+
+
   profileMode:
     enabled: false
     title: Tech Down Under

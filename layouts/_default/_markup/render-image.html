@@ -1,16 +1,20 @@
-{{/* get file that matches the filename as specified in the resource */}}
+<!-- get file that matches the filename as specified in the resource -->
 {{ $image := .Page.Resources.GetMatch .Destination }}
 
+<!-- check if image exists -->
 {{ if $image }}
+<!-- defaults -->
+{{ $isizes := "(min-width: 1023px) 780px, (min-width: 675px) 620px, 100vw" }}
 
 {{ $alt := (.PlainText | safeHTML) | default "picture" }}{{ $caption := "" }} {{ with .Title }}{{ $caption = . | safeHTML }}{{ end }}
 {{ $iw := $image.Width }}{{ $ih := $image.Height }}{{ $ms   := site.Params.Images.maxSize | default 1024}}
+{{ if gt (len site.Params.Images.sizes) 0 }}{{ $isizes := site.Params.Images.sizes}}{{end}}
 {{ if or (ge $iw $ms) (ge $ih $ms) }}{{ $image = $image.Fit (print $ms "x" $ms ) }}{{end}}
 {{ $srcset := slice }}{{ range site.Params.Images.setSizes -}}
   {{ if lt (mul . 1.2) $iw }}{{ $size := print  . "x" .}}{{ $thumb := $image.Fit $size }}{{ $srcset = $srcset | append (printf ("%s %dw") $thumb.RelPermalink $thumb.Width ) }}{{ end }}
 {{- end }}
 <img class="lazy" loading=lazy src={{ $image.RelPermalink }}
-{{ if gt (len $srcset) 0 }}sizes="(max-width: 480px) 90vw, (max-width: 960px) 80vw, {{ $image.Width }}px" {{ $sl := delimit $srcset ", "}}srcset="{{$sl}}" {{ end }}
+{{ if gt (len $srcset) 0 }}sizes="{{$isizes}}, {{ $image.Width }}px" {{ $sl := delimit $srcset ", "}} srcset="{{$sl}}" {{ end }}
 width={{ $image.Width }} alt={{ $alt }} /><br/>
 {{- with $caption }}<span class="mb3 i f6">&raquo; {{ . | markdownify }} &laquo;</span>{{ end -}}
 
