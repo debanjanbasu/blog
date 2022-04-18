@@ -8,3 +8,5 @@ github.com/adityatelange/hugo-PaperMod v0.0.0-20220215143121-43c810c3e20b h1:Nvu
 github.com/adityatelange/hugo-PaperMod v0.0.0-20220215143121-43c810c3e20b/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
 github.com/adityatelange/hugo-PaperMod v0.0.0-20220331180356-09921bb542e9 h1:lXiOmDh0vq6YyFKOdPpNAUrbTKIv+cv5AJF0KWwBHrc=
 github.com/adityatelange/hugo-PaperMod v0.0.0-20220331180356-09921bb542e9/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20220415155029-fc8c8666cf1e h1:mC1xeYvGoZNavRrm22tNkHx2ibtujbrj36d5H9x1Sjg=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20220415155029-fc8c8666cf1e/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
