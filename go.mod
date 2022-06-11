@@ -2,4 +2,4 @@ module github.com/debanjanbasu/blog
 
 go 1.17
 
-require github.com/adityatelange/hugo-PaperMod v0.0.0-20220527171932-6aced45a65a8 // indirect
+require github.com/adityatelange/hugo-PaperMod v0.0.0-20220610155613-a94674e6c9c7 // indirect
