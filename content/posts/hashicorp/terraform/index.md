@@ -20,4 +20,4 @@ cover:
 
 # Background
 
-Necessity is the mother of all invention.
+Necessity is the mother of all invention, especially in a small team.
