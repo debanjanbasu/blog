@@ -5,7 +5,7 @@ date: "2022-08-16"
 description: "Automation to the max - necessity driving innovation."
 tags: ["azure", "cloud", "AD", "Australia", "DevOps", "terraform", "automation"]
 categories: ["devops", "cloud", "azure", "operations"]
-series: ["Operations as Code"]
+series: ["Operation as Code"]
 aliases: ["operation-as-code"]
 ShowToc: true
 TocOpen: true
