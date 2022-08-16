@@ -1,4 +1,4 @@
-[![Deploy Hugo site to Pages](https://github.com/debanjanbasu/blog/actions/workflows/pages.yml/badge.svg)](https://github.com/debanjanbasu/blog/actions/workflows/pages.yml)
+[![deploy-hugo-site-to-pages](https://github.com/debanjanbasu/blog/actions/workflows/pages.yml/badge.svg)](https://github.com/debanjanbasu/blog/actions/workflows/pages.yml)
 
 # blog
 
